@@ -6,13 +6,17 @@ package se.jopa.pifo.core.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author jopa
  *
  */
 @XmlRootElement
+@XmlType(propOrder = { "name", "sensors", "actuators" })
 public class Pi {
 
 	/**
@@ -20,18 +24,12 @@ public class Pi {
 	 */
 	
 	private String name;
-	private List<Sensor> sensors = null;
-	private List<Actuator> actuators = null;
+	//@XmlElementWrapper(name = "sensors")
+	//@XmlElement(name = "sensor")
+	private List<Sensor> sensors = new ArrayList<Sensor>();
+	private List<Actuator> actuators = new ArrayList<Actuator>();
 	
 	public Pi() {
-		setSensors(new ArrayList<Sensor>());
-		setActuators(new ArrayList<Actuator>());
-		
-		sensors.add(new Sensor("Thermometer 1"));
-		sensors.add(new Sensor("Thermometer 2"));
-		
-		actuators.add(new Actuator("Pump 1"));
-		
 	}
 	
 	public Pi(String name) {
