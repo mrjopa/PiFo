@@ -16,66 +16,55 @@ import javax.xml.bind.annotation.XmlType;
  *
  */
 @XmlRootElement
-@XmlType(propOrder = { "name", "sensors", "actuators" })
-public class Pi {
-
-	/**
-	 * 
-	 */
-	
+@XmlType(propOrder = { "ip", "name", "sensors", "actuators" })
+public class Pi {	
+	private String ip;
 	private String name;
-	//@XmlElementWrapper(name = "sensors")
-	//@XmlElement(name = "sensor")
 	private List<Sensor> sensors = new ArrayList<Sensor>();
 	private List<Actuator> actuators = new ArrayList<Actuator>();
 	
 	public Pi() {
 	}
 	
-	public Pi(String name) {
+	public Pi(String ip, String name) {
+		this.setIp(ip);
 		this.setName(name);
 	}
 
-	/**
-	 * @return the name
-	 */
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
+	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the sensors
-	 */
 	public List<Sensor> getSensors() {
 		return sensors;
 	}
 
-	/**
-	 * @param sensors the sensors to set
-	 */
+	//@XmlElementWrapper(name = "sensorList")
+	@XmlElement(name = "sensor")
 	public void setSensors(List<Sensor> sensors) {
 		this.sensors = sensors;
 	}
 
-	/**
-	 * @return the actuators
-	 */
 	public List<Actuator> getActuators() {
 		return actuators;
 	}
 
-	/**
-	 * @param actuators the actuators to set
-	 */
+	//@XmlElementWrapper(name = "actuatorList")
+	@XmlElement(name = "actuator")
 	public void setActuators(List<Actuator> actuators) {
 		this.actuators = actuators;
 	}
-
 }

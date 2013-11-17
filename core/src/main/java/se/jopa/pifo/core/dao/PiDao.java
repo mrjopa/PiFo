@@ -15,17 +15,17 @@ public enum PiDao {
   private PiDao() {
 	System.out.println("PiDao");
 	
-    Pi pi_1 = new Pi("localhost");
+    Pi pi_1 = new Pi("127.0.0.1", "Pi_1");
 
-    pi_1.getSensors().add(new Sensor("Thermometer 1"));
-    pi_1.getSensors().add(new Sensor("Thermometer 2"));
-    pi_1.getActuators().add(new Actuator("Pump 1"));
+    pi_1.getSensors().add(new Sensor("1", "Thermometer 1"));
+    pi_1.getSensors().add(new Sensor("2", "Thermometer 2"));
+    pi_1.getActuators().add(new Actuator("1", "Pump 1"));
     
-    Pi pi_2 = new Pi("168.1.0.67");
+    Pi pi_2 = new Pi("192.168.1.64", "Pi_2");
 
-    pi_2.getSensors().add(new Sensor("Thermometer 11"));
-    pi_2.getSensors().add(new Sensor("Thermometer 22"));
-    pi_2.getActuators().add(new Actuator("Pump 11"));    
+    pi_2.getSensors().add(new Sensor("1", "Thermometer 11"));
+    pi_2.getSensors().add(new Sensor("2", "Thermometer 22"));
+    pi_2.getActuators().add(new Actuator("1", "Pump 11"));    
     
     contentProvider.add(pi_1);
     contentProvider.add(pi_2);

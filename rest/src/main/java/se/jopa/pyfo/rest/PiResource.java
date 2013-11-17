@@ -44,4 +44,10 @@ public class PiResource {
     public Pi getPiApplicationXml() { 
         return pi;
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Pi getPiJson() {
+        return pi;
+    }
 }
