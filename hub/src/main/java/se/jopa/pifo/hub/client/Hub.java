@@ -1,21 +1,35 @@
 package se.jopa.pifo.hub.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.jopa.pifo.hub.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.SplitLayoutPanel;
+import com.google.gwt.user.client.ui.StackLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -40,6 +54,57 @@ public class Hub implements EntryPoint {
    * This is the entry point method.
    */
   public void onModuleLoad() {
+	  int margin = 20;
+	  
+	    // Create a three-pane layout with splitters. 
+	    SplitLayoutPanel p = new SplitLayoutPanel(0);
+	   
+	    p.addNorth(new TopPanel(), 100);
+	    p.addWest(new HTML(""), margin);
+	    p.addEast(new HTML(""), margin);
+	    p.addSouth(new HTML("https://github.com/mrjopa/PiFo.git"), 20);
+	    
+
+	    // Attach the LayoutPanel to the RootLayoutPanel. The latter will listen for
+	    // resize events on the window to ensure that its children are informed of
+	    // possible size changes.
+		  // Create a three-item stack, with headers sized in EMs. 
+	    StackLayoutPanel slp = new StackLayoutPanel(Unit.EM);
+	    
+	  
+	    List<String> piList = new ArrayList<String>();
+	    piList.add("127.0.0.1");
+	    piList.add("192.168.1.64");
+	    
+	    for(String pi : piList) {
+		    slp.add(new PiPanel(), new HTML(pi),  4);
+	    }
+	  
+
+	    // Attach the LayoutPanel to the RootLayoutPanel. The latter will listen for
+	    // resize events on the window to ensure that its children are informed of
+	    // possible size changes.
+	   // RootLayoutPanel rp = RootLayoutPanel.get();
+	    //rp.add(slp);	  
+	    p.add(slp);
+	    //p.add(new HTML("details"));
+	    RootLayoutPanel rp = RootLayoutPanel.get();
+	    rp.add(p);
+	  
+	  
+	  
+//	    // Create a new stack layout panel.
+//	    StackLayoutPanel stackPanel = new StackLayoutPanel(Unit.EM);
+//	    stackPanel.setPixelSize(200, 400);
+//	    
+//	    stackPanel.add(createHeaderWidget("Test", null));
+//	    
+//	  RootPanel.get("hub").add(new TopPanel()); 
+//	    //RootPanel.get("hub").add(stackPanel);
+//	  
+//	  
+	  
+	  
     final Button sendButton = new Button( messages.sendButton() );
     final TextBox nameField = new TextBox();
     nameField.setText( messages.nameField() );
@@ -50,9 +115,9 @@ public class Hub implements EntryPoint {
 
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
-    RootPanel.get("nameFieldContainer").add(nameField);
-    RootPanel.get("sendButtonContainer").add(sendButton);
-    RootPanel.get("errorLabelContainer").add(errorLabel);
+    //RootPanel.get("nameFieldContainer").add(nameField);
+    //RootPanel.get("sendButtonContainer").add(sendButton);
+    //RootPanel.get("errorLabelContainer").add(errorLabel);
 
     // Focus the cursor on the name field when the app loads
     nameField.setFocus(true);
@@ -146,4 +211,25 @@ public class Hub implements EntryPoint {
     sendButton.addClickHandler(handler);
     nameField.addKeyUpHandler(handler);
   }
+  
+  /**
+   * Create a widget to display in the header that includes an image and some
+   * text.
+   * 
+   * @param text the header text
+   * @param image the {@link ImageResource} to add next to the header
+   * @return the header widget
+   */
+  private Widget createHeaderWidget(String text, ImageResource image) {
+    // Add the image and text to a horizontal panel
+    HorizontalPanel hPanel = new HorizontalPanel();
+    hPanel.setHeight("100%");
+    hPanel.setSpacing(0);
+    hPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+    //hPanel.add(new Image(image));
+    HTML headerText = new HTML(text);
+    headerText.setStyleName("cw-StackPanelHeader");
+    hPanel.add(headerText);
+    return new SimplePanel(hPanel);
+  }  
 }
