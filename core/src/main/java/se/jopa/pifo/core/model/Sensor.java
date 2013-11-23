@@ -4,18 +4,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
-@XmlType(propOrder = { "id", "name" })
+@XmlType(propOrder = { "id", "name", "value"})
 public class Sensor {
 	
 	private String id;
 	private String name;
+	private String value;
 	
 	public Sensor() {
 	}
 
-	public Sensor(String id, String name) {
+	public Sensor(String id, String name, String value) {
 		this.setId(id);
 		this.setName(name);
+		this.setValue(value);
 	}
 
 	public String getId() {
@@ -32,5 +34,19 @@ public class Sensor {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

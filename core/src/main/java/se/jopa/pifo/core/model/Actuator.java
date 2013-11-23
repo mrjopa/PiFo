@@ -4,11 +4,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
-@XmlType(propOrder = { "id", "name" })
+@XmlType(propOrder = { "id", "name", "value" })
 public class Actuator {
 
 	private String id;
 	private String name;
+	private String value;
 	
 	public Actuator() {
 		
@@ -32,5 +33,19 @@ public class Actuator {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

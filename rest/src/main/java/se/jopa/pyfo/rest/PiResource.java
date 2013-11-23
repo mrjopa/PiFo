@@ -7,7 +7,6 @@ import javax.ws.rs.core.MediaType;
 
 import se.jopa.pifo.core.dao.PiDao;
 import se.jopa.pifo.core.model.Pi;
-import se.jopa.pifo.core.model.Sensor;
 
 @Path("pi")
 public class PiResource {
@@ -16,7 +15,7 @@ public class PiResource {
 	public PiResource() {
 		System.out.println("PiResource::");
 
-    	pi = PiDao.instance.getModel().get(0);
+    	pi = PiDao.instance.getPi();
     	System.out.println(pi);
 	}
 
