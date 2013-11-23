@@ -55,13 +55,15 @@ public class PiResourceTest {
     public void testGetIt() {
     	
         String responseMsgXml = target.path("pi").request(MediaType.APPLICATION_XML).get(String.class);
+        System.out.println(target.getUri());        
         System.out.println(responseMsgXml);
     
         String responseMsgJson = target.path("pi").request(MediaType.APPLICATION_JSON).get(String.class);
+        System.out.println(target.getUri());
         System.out.println(responseMsgJson);
 
-        
         Pi pi = target.path("pi").request(MediaType.APPLICATION_JSON).get(Pi.class);
+        System.out.println(target.getUri());
         System.out.println(pi.getIp());
         //assertEquals("Got it!", responseMsg);
         
