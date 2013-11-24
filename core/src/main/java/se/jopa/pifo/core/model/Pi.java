@@ -3,6 +3,7 @@
  */
 package se.jopa.pifo.core.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,12 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement
 @XmlType(propOrder = { "ip", "name", "sensors", "actuators" })
-public class Pi {	
+public class Pi implements Serializable{	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String ip;
 	private String name;
 	private List<Sensor> sensors = new ArrayList<Sensor>();
