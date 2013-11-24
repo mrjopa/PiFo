@@ -52,4 +52,16 @@ public enum PiDao {
 	  return sensor;
   }
   
+  public Actuator getActuator(String id) {
+	  Actuator actuator = null;
+	  
+	  for(Actuator a : getPi().getActuators()) {
+		  if(a.getId().equals(id)) {
+			  actuator = a;
+			  break;
+		  }
+	  }
+	  
+	  return actuator;
+  }
 } 
