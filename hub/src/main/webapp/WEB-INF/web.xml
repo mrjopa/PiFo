@@ -10,12 +10,22 @@
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>se.jopa.pifo.hub.server.GreetingServiceImpl</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>pifoServlet</servlet-name>
+    <servlet-class>se.jopa.pifo.hub.server.PiFoServiceImpl</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/Hub/greet</url-pattern>
   </servlet-mapping>
 
+    <servlet-mapping>
+    <servlet-name>pifoServlet</servlet-name>
+    <url-pattern>/Hub/pifo</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Hub.html</welcome-file>

@@ -47,7 +47,8 @@ public class Hub implements EntryPoint {
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-
+  private final PiFoServiceAsync piFoServiceAsync = GWT.create(PiFoService.class);
+  
   private final Messages messages = GWT.create(Messages.class);
 
   /**
@@ -77,7 +78,7 @@ public class Hub implements EntryPoint {
 	    piList.add("192.168.1.64");
 	    
 	    for(String pi : piList) {
-		    slp.add(new PiPanel(), new HTML(pi),  4);
+		    slp.add(new PiPanel(piFoServiceAsync), new HTML(pi),  4);
 	    }
 	  
 

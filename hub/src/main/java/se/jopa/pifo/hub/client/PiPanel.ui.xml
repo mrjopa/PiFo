@@ -20,9 +20,16 @@
 		gwt-image: 'logo';
 		position: absolute;
 		}
+
+  		.buttons {
+    		text-align: right;
+  		}
 	</ui:style>
 
 	<g:HTMLPanel>
 	    <h3>Pi info</h3>
+    <div class='{style.buttons}'>
+      <g:Button text='Refresh' ui:field='refreshButton' />
+    </div>
 	</g:HTMLPanel>
 </ui:UiBinder>
