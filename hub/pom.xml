@@ -18,7 +18,20 @@
     <!-- GWT needs at least java 1.5 -->
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jersey.version>2.4.1</jersey.version>
   </properties>
+  
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.glassfish.jersey</groupId>
+                <artifactId>jersey-bom</artifactId>
+                <version>${jersey.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -57,8 +70,27 @@
     	<artifactId>core</artifactId>
     	<version>1.0-SNAPSHOT</version>
     </dependency>
+        <!-- Added for standalone -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+        </dependency>
+        <!-- End Added for standalone -->
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
+            <!-- artifactId>jersey-container-servlet</artifactId -->
+        </dependency>
+        <!-- uncomment this to get JSON support -->
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+        </dependency>
   </dependencies>
-
+    
   <build>
     <!-- Generate compiled stuff in the folder used for developing mode -->
     <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
@@ -118,5 +150,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

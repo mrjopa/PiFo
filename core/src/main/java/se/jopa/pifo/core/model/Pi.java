@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement
 @XmlType(propOrder = { "ip", "name", "sensors", "actuators" })
-public class Pi implements Serializable{	
+public class Pi implements Serializable {	
 	/**
 	 * 
 	 */

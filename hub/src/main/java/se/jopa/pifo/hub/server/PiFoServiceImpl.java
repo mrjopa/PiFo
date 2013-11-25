@@ -1,7 +1,11 @@
 package se.jopa.pifo.hub.server;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
 import se.jopa.pifo.core.model.Pi;
-import se.jopa.pifo.hub.client.GreetingService;
 import se.jopa.pifo.hub.client.PiFoService;
 import se.jopa.pifo.hub.shared.FieldVerifier;
 
@@ -50,8 +54,23 @@ public class PiFoServiceImpl extends RemoteServiceServlet implements
   }
 
 @Override
-public String getPi(String host) throws IllegalArgumentException {
+public Pi getPi(String host) throws IllegalArgumentException {
+	String BASE_URI = "http://localhost:8080/pifo/";
+    Client c = ClientBuilder.newClient();
+
+    // uncomment the following line if you want to enable
+    // support for JSON in the client (you also have to uncomment
+    // dependency on jersey-media-json module in pom.xml and Main.startServer())
+    // --
+    // c.configuration().enable(new org.glassfish.jersey.media.json.JsonJaxbFeature());
+
+    WebTarget target = c.target(BASE_URI);
+    Pi pi = target.path("pi").request(MediaType.APPLICATION_JSON).get(Pi.class);
+    System.out.println(target.getUri());
+    System.out.println(pi.getIp());
+    //assertEquals("Got it!", responseMsg);    
+    
 	// TODO Auto-generated method stub
-	return "Hello from Pi";
+	return pi;
 }
 }

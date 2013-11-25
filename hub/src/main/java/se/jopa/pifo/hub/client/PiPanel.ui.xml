@@ -6,6 +6,28 @@
 	<ui:image field='logo' src='logo.png' />
 
 	<ui:style>
+		
+table, th, td
+{
+border: 1px solid black;
+}
+
+table 
+{
+width:100%;
+}
+th
+{
+height:50px;
+}
+
+.tdHeader {
+    width:30%;
+}
+
+.tdData {
+    width:70%;
+}
 
 		.statusDiv {
 		text-align: right;
@@ -18,18 +40,49 @@
 
 		@sprite .logo {
 		gwt-image: 'logo';
-		position: absolute;
+		position:
+		absolute;
 		}
 
-  		.buttons {
-    		text-align: right;
-  		}
+		.buttons {
+		text-align: left;
+		}
+
+
+.cw-FlexTable td {
+  border: 1px solid #BBBBBB;
+  padding: 3px;
+}
+.cw-FlexTable-buttonPanel td {
+  border: 0px;
+}
 	</ui:style>
 
 	<g:HTMLPanel>
-	    <h3>Pi info</h3>
-    <div class='{style.buttons}'>
-      <g:Button text='Refresh' ui:field='refreshButton' />
-    </div>
+		<h3>Pi info</h3>
+
+		<g:Grid>
+			<g:row>
+				<g:customCell class='{style.tdHeader}'>
+					<g:Label>Ip</g:Label>
+				</g:customCell>
+				<g:customCell class='{style.tdData}'>
+					<g:Label ui:field='ipLabel'></g:Label>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label>Name</g:Label>
+				</g:customCell>
+				<g:customCell>
+					<g:Label ui:field='nameLabel'></g:Label>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+
+		<div></div>
+		<div class='{style.buttons}'>
+			<g:Button text='Refresh' ui:field='refreshButton' />
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder>

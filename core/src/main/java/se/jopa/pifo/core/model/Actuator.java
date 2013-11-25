@@ -1,12 +1,15 @@
 package se.jopa.pifo.core.model;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType(propOrder = { "id", "name", "value" })
-public class Actuator {
+public class Actuator implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
 	private String value;

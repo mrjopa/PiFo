@@ -3,6 +3,7 @@ package se.jopa.pifo.hub.client;
 import se.jopa.pifo.core.model.Pi;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -11,16 +12,19 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The top panel, which contains the 'welcome' message and various links.
  */
 public class PiPanel extends Composite {
-
+	@UiField Label ipLabel;
+	@UiField Label nameLabel;
+	
 	Pi pi = new Pi();
-  interface Binder extends UiBinder<Widget, PiPanel> { }
-  private static final Binder binder = GWT.create(Binder.class);
+	interface Binder extends UiBinder<Widget, PiPanel> { }
+	private static final Binder binder = GWT.create(Binder.class);
 
   PiFoServiceAsync piFoServiceAsync = null;
 
@@ -35,25 +39,17 @@ public class PiPanel extends Composite {
   void onSignOutClicked(ClickEvent event) {
 	  System.out.println("refreshButton -->");
 	  
-	  piFoServiceAsync.getPi("host", new AsyncCallback<String>() {
+	  piFoServiceAsync.getPi("host", new AsyncCallback<Pi>() {
           public void onFailure(Throwable caught) {
-            // Show the RPC error message to the user
         	  System.out.println("Error: " + caught.getMessage());
-//            dialogBox.setText("Remote Procedure Call - Failure");
-//            serverResponseLabel.addStyleName("serverResponseLabelError");
-//            serverResponseLabel.setHTML(SERVER_ERROR);
-//            dialogBox.center();
-//            closeButton.setFocus(true);
-          }
+           }
 
-          public void onSuccess(String result) {
-        	  System.out.println("Success");
-        	  
-//            dialogBox.setText("Remote Procedure Call");
-//            serverResponseLabel.removeStyleName("serverResponseLabelError");
-//            serverResponseLabel.setHTML(result);
-//            dialogBox.center();
-//            closeButton.setFocus(true);
+          public void onSuccess(Pi result) {
+        	  pi = result;
+        	  System.out.println("Success: " + result.getName());
+          	  
+        	  ipLabel.setText(result.getIp());
+        	  nameLabel.setText(result.getName());
           }
         });
   }

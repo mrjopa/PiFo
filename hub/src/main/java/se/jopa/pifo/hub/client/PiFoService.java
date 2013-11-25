@@ -10,5 +10,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("pifo")
 public interface PiFoService extends RemoteService {
-  String getPi(String host) throws IllegalArgumentException;
+  Pi getPi(String host) throws IllegalArgumentException;
 }
