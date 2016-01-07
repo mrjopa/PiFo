@@ -1,6 +1,7 @@
 package se.jopa.pifo.hub.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import se.jopa.pifo.hub.shared.FieldVerifier;
@@ -13,7 +14,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.TimeZone;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -54,7 +59,28 @@ public class Hub implements EntryPoint {
   /**
    * This is the entry point method.
    */
+  Timer t = null;
+  
   public void onModuleLoad() {
+	  
+	  t = new Timer() {
+	      @Override
+	      public void run() {
+	    	  Date date = new Date();
+	    	  DateTimeFormat dtf = DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss");
+	    	  
+	    	  //Window.alert(dtf.format(date, TimeZone.createTimeZone(0)));
+	    	  
+	    	  System.out.println("Timer event: " + dtf.format(date, TimeZone.createTimeZone(0)));
+//	        Window.alert("Nifty, eh?");
+	      }
+	    };
+
+	    // Schedule the timer to run once in 5 seconds.
+//	    t.schedule(1000);
+	    t.scheduleRepeating(1000);
+	  
+	  
 	  int margin = 20;
 	  
 	    // Create a three-pane layout with splitters. 

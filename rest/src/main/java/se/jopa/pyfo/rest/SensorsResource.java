@@ -40,6 +40,14 @@ public class SensorsResource {
 		sensors.addAll(PiDao.instance.getPi().getSensors());
 		return sensors;
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Sensor> getSensorJaon() {
+		List<Sensor> sensors = new ArrayList<Sensor>();
+		sensors.addAll(PiDao.instance.getPi().getSensors());
+		return sensors;
+	}
 
 	// retuns the number of todos
 	// use http://localhost:8080/de.vogella.jersey.todo/rest/todos/count
